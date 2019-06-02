@@ -1,0 +1,32 @@
+*{
+    line-height: 1.5em;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    background-color: black;
+    color: pink;
+    margin: 10px auto;
+}
+
+#gems{
+    margin: 0 auto;
+}
+
+.ladies{
+    height: 300px;
+}
+
+button { 
+    transition: all .2s ease-in-out; 
+    border-color: none;
+    border-style: none;
+}
+
+#start{
+    border-color:pink;
+    border-style: solid;
+    border-width:  2px;
+}
+
+button:hover { 
+    transform: scale(1.1); 
+}
