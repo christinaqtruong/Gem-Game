@@ -7,12 +7,14 @@ $(document).ready(function(){
 
 //    * The player will be shown a random number at the start of the game.
 var lockGame = false;
-
+var wins = 0;
+var losses = 0;
+var number = (Math.floor(Math.random() * 121)) + 19;
+var total = 0;
 
 var letsPlay = $("#start").on("click", function(){ 
     if (lockGame !== true) {
-
-        var number = (Math.floor(Math.random() * 121)) + 19;
+    
         console.log(number);
         $(".generator").text(number);
         lockGame = true;
@@ -22,61 +24,78 @@ var letsPlay = $("#start").on("click", function(){
     var amethyst = $("#amethyst");
     var pearl = $("#pearl");
     var pink = $("#pink_diamond");
-    var total = 0;
+    
     var playerScore = $(".playerScore");
 
     playerScore.text(total);
 
+    var garnetsValue = (Math.floor(Math.random() * 12));
     garnet.on("click", function(){
-        var x = 1
-        total = total + x;
+        total = total + garnetsValue;
         console.log(total);
         playerScore.text(total);  
+       
     })
 
+    var amethystsValue = (Math.floor(Math.random() * 12));
     amethyst.on("click", function(){
-        var x = 5;
-        total = total + x;
+        total = total + amethystsValue;
         console.log(total);
         playerScore.text(total);  
+       
     })
 
+    var pearlsValue = (Math.floor(Math.random() * 12));
     pearl.on("click", function(){
-        var x = 20;
-        total = total + x;
+        total = total + pearlsValue;
         console.log(total);
         playerScore.text(total);  
+        
     })
 
+    var pinksValue = (Math.floor(Math.random() * 12));
     pink.on("click", function(){
-        var x = 100;
-        total = total + x;
+        total = total + pinksValue;
         console.log(total);
         playerScore.text(total);  
+        
     })
 
 //      * Your game will hide this amount until the player clicks a crystal.
 //      * When they do click one, update the player's score counter.
 
 //    * The player wins if their total score matches the random number from the beginning of the game.
-    if (total === number){
-        lockGame = true;
-        console.log("You win!")
-        $("#start").text("Play again")
-        $(".winner").text("Congrats! You won!")
-        letsPlay();
+    $(document).on("click",function(){
+        if (total === number){
+            
+            console.log("You win!")
+
+            ++wins
+            console.log(wins)
+            $(".wins").text("Number of wins: " + wins)
+
+            $("#start").text("Play again")
+            $(".winner").text("Congrats! You won!")
+            letsPlay();
+        }
 
     
 //    * The player loses if their score goes above the random number.
         if (total > number){
-            lockGame = true;
-            console.log("You lost!")
+                
+        console.log("You lost!")
+
+        ++losses
+        console.log(losses)
+        $(".wins").text("Number of losses: " + losses)
+
             $(".loser").text("Oops! You busted! Click Start Over to play again.")
             $("#start").text("Start Over")
             letsPlay();
-            
         }
-        }
+    }
+        
+});
 
 //    * The game restarts whenever the player wins or loses.
 
@@ -89,5 +108,3 @@ var letsPlay = $("#start").on("click", function(){
 // * The random number shown at the start of the game should be between 19 - 120.
 
 // * Each crystal should have a random hidden value between 1 - 12.
-})
-});
