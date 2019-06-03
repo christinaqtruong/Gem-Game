@@ -6,20 +6,50 @@
 $(document).ready(function(){
 
 //    * The player will be shown a random number at the start of the game.
+var lockGame = false;
+
 var letsPlay = $("#start").on("click", function(){ 
+    if (lockGame !== true) {
+        var number = (Math.floor(Math.random() * 121)) + 19;
+        console.log(number);
 
-    var number = (Math.floor(Math.random() * 121)) + 19;
-    console.log(number);
-
-    var newDiv = $("<div/>")
-    var generatorDiv = $(".generator");
-    newDiv.addClass("randomNumber");
-    newDiv.text(number);
-    generatorDiv.append(newDiv);
-    
+        $(".generator").prepend("<br>" + number);
 
 //    * When the player clicks on a crystal, it will add a specific amount of points to the player's total score. 
+        var garnet = $("#garnet");
+        var amethyst = $("#amethyst");
+        var pearl = $("#pearl");
+        var pink = $("#pink_diamond");
+        var total = 0;
+        var playerScore = $(".playerScore");
 
+        garnet.on("click", function(){
+            ++total;
+            console.log(total);
+            playerScore.text(total);  
+        })
+
+        amethyst.on("click", function(){
+            var x = 5;
+            total = total + x;
+            console.log(total);
+            playerScore.text(total);  
+        })
+
+        pearl.on("click", function(){
+            var x = 20;
+            total = total + x;
+            console.log(total);
+            playerScore.text(total);  
+        })
+
+        pink.on("click", function(){
+            var x = 100;
+            total = total + x;
+            console.log(total);
+            playerScore.text(total);  
+        })
+    }
 //      * Your game will hide this amount until the player clicks a crystal.
 //      * When they do click one, update the player's score counter.
 

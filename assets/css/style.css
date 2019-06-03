@@ -5,6 +5,24 @@
     background-color: black;
     color: pink;
     margin: 10px auto;
+    font-size: 1.02em;
+}
+
+h1{
+    font-size: 1.5em;
+}
+
+.instructions{
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.generator{
+    font-size: 1.5em;
+}
+
+.playerScore{
+    font-size: 1.5em;
 }
 
 #gems{
@@ -13,6 +31,10 @@
 
 .ladies{
     height: 300px;
+}
+
+.name{
+    float: bottom;
 }
 
 button { 
@@ -25,6 +47,7 @@ button {
     border-color:pink;
     border-style: solid;
     border-width:  2px;
+    font-size: 1.5em;
 }
 
 button:hover { 
