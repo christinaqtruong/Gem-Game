@@ -9,12 +9,13 @@
 }
 
 h1{
-    font-size: 1.5em;
+    font-size: 3em;
 }
 
 .instructions{
     margin: 0 auto;
-    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .generator{
@@ -47,7 +48,11 @@ button {
     border-color:pink;
     border-style: solid;
     border-width:  2px;
-    font-size: 1.5em;
+    font-size: 1.2em;
+    background: pink;
+    color: black;
+    font-weight: bold;
+
 }
 
 button:hover { 
