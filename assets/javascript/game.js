@@ -1,145 +1,128 @@
 $(document).ready(function(){
 
-var lockGame = false;
-
-//counters and initial score
-var wins = 0;
-var losses = 0;
-var total = 0;
-
-//picks a random number for the player to match
-var number = (Math.floor(Math.random() * 121)) + 19;
-
-var letsPlay = $("#start").on("click", function(){ 
+    //counters and initial score
+    var wins = 0;
+    var losses = 0;
+    var total = 0;
     
-    //once the player clicks the button, it console logs the random number and puts it on the screen and hides the button
-    if (lockGame !== true) {
-    
-    console.log(number);
-
-    $(".generator").text(number);
-    $("#start").hide();
-    lockGame = true;
-    }
-    
-    //variables for grabbing the different gem elements
     var garnet = $("#garnet");
     var amethyst = $("#amethyst");
     var pearl = $("#pearl");
     var pink = $("#pink_diamond");
     
-    //puts total score on the screen
-    var playerScore = $(".playerScore");
-    playerScore.text(total);
-
-    //sets a random value for the gems and console logs it
-    var garnetsValue = (Math.floor(Math.random() * 12));
-    console.log(garnetsValue);
-
-    var amethystsValue = (Math.floor(Math.random() * 12));
-    console.log(amethystsValue);
-
-    var pearlsValue = (Math.floor(Math.random() * 12));
-    console.log(pearlsValue);
-
-    var pinksValue = (Math.floor(Math.random() * 12));
-    console.log(pinksValue);
-
-  //If the player's total score equals the random number generated, display winning statements, add 1 the win counter and reveal the new button displaying the text "play again"
-  var winner = function(){
+    var garnetsValue = 0;
+    var amethystsValue = 0;
+    var pearslValue = 0;
+    var pinksValue = 0;
     
-    if (total === number){
+    var playerScore = 0;
+    
+    var over = false;
+    
+    //picks a random number for the player to match
+    var number = 0;
+    
+    $(".winner").text("Congrats! You won!");
+    $(".loser").text("Oops! You busted! Click Start Over to play again.");
+    
+    
+    
+    var letsPlay = $("#start").on("click", function()
+    { 
+        initialize();
+    })
+    
+    garnet.on("click", function(){
+        total = total + garnetsValue;
+        console.log(total);
+        playerScore.text(total);
+        check(total, number);
+    })  
+    
+    amethyst.on("click", function(){
+        total = total + amethystsValue;
+        console.log(total);
+        playerScore.text(total);
+        check(total, number);
+    })
+    
+    pearl.on("click", function(){
+        total = total + pearlsValue;
+        console.log(total);
+        playerScore.text(total); 
+        check(total, number);
+    })
+    
+    pink.on("click", function(){
+        total = total + pinksValue;
+        console.log(total);
+        playerScore.text(total);
+        check(total, number);
+    })
+    
+    
+    function check(total_check, number_check) {
+        if (!over){
+            if (total_check == number_check){
+                console.log("You win!")
+    
+                wins++
+                console.log(wins)
+                $(".wins").text("Number of wins: " + wins)
+                $("#start").show();
+                $("#start").text("Play again")
                 
-            console.log("You win!")
-        
-            wins++
-            console.log(wins)
-
-            $(".wins").text("Number of wins: " + wins)
-            $("#start").show();
-            $("#start").text("Play again")
-            $(".winner").text("Congrats! You won!")
-
-            lockGame = false;
-
-            garnet.text(garnetsValue);
-            pearl.text(pearlsValue);
-            amethyst.text(amethystsValue);
-            pink.text(pinksValue);
-        } else
+                $(".winner").show();
+                over = true;
+            }
+            else if (total_check > number_check){
+                console.log("You lost!")
     
-    
-//     //    * The player loses if their score goes above the random number.
-    if (total > number){
-            
-        console.log("You lost!")
-        
-        losses++
-        console.log(losses)
-        
-        $(".losses").text("Number of losses: " + losses)
-        $("#start").show();
-        $(".loser").text("Oops! You busted! Click Start Over to play again.")
-        $("#start").text("Start Over")
-        
-        lockGame = false;
-
-        garnet.text(garnetsValue);
-        pearl.text(pearlsValue);
-        amethyst.text(amethystsValue);
-        pink.text(pinksValue);
-    }
-}
-
-
-    /*If the player's total does not equal the random generator number, then clicking Garnet's button adds 
-    her value to the total score and displays the new total on the screen*/
-    if (total != number){
-        garnet.on("click", function(){
-            total = total + garnetsValue;
-            playerScore.text(total);
-            winner();
-        })  
-        
-        amethyst.on("click", function(){
-            total = total + amethystsValue;
-            console.log(total);
-            playerScore.text(total);
-            winner();  
-        })
-    
-        pearl.on("click", function(){
-            total = total + pearlsValue;
-            console.log(total);
-            playerScore.text(total);  
-            winner();
-        })
-   
-        pink.on("click", function(){
-            total = total + pinksValue;
-            console.log(total);
-            playerScore.text(total);
-            winner();   
-        })
+                losses++
+                console.log(losses)
+                $(".losses").text("Number of losses: " + losses)
+                $("#start").show();
+                $("#start").text("Start Over")
+                
+                $(".loser").show();
+                over = true;
+            }
+            else{
+                return;
+            }
         }
+    }
     
-  
-})
-})
-
-//      * Your game will hide this amount until the player clicks a crystal.
-//      * When they do click one, update the player's score counter.
-
-
-
-//    * The game restarts whenever the player wins or loses.
-
-//      * When the game begins again, the player should see a new random number. Also, all the crystals will have four new hidden values. Of course, the user's score (and score counter) will reset to zero.
-
-//    * The app should show the number of games the player wins and loses. To that end, do not refresh the page as a means to restart the game.
-
-// ##### Option 1 Game design notes
-
-// * The random number shown at the start of the game should be between 19 - 120.
-
-// * Each crystal should have a random hidden value between 1 - 12.
+    function initialize()
+    {
+        number = (Math.floor(Math.random() * 121)) + 19;
+        console.log(number);
+    
+        $(".generator").text(number);
+        $("#start").hide();
+        $(".loser").hide();
+        $(".winner").hide();
+        
+        //puts total score on the screen
+        total = 0;
+        playerScore = $(".playerScore");
+        playerScore.text(total);
+    
+        //sets a random value for the gems and console logs it
+        garnetsValue = (Math.floor(Math.random() * 12));
+        console.log(garnetsValue);
+    
+        amethystsValue = (Math.floor(Math.random() * 12));
+        console.log(amethystsValue);
+    
+        pearlsValue = (Math.floor(Math.random() * 12));
+        console.log(pearlsValue);
+    
+        pinksValue = (Math.floor(Math.random() * 12));
+        console.log(pinksValue);
+        
+        over = false;
+    }
+    
+    })
+    
